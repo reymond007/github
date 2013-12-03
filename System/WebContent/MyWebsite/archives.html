@@ -1,0 +1,325 @@
+﻿<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Archives Management</title>
+<link rel="stylesheet" type="text/css" href="skin/css/base.css">
+<script language="javascript">
+function viewArc(aid){
+	if(aid==0) aid = getOneItem();
+	window.open("archives.asp?aid="+aid+"&action=viewArchives");
+}
+function editArc(aid){
+	if(aid==0) aid = getOneItem();
+	location="archives.asp?aid="+aid+"&action=editArchives";
+}
+function updateArc(aid){
+	var qstr=getCheckboxItem();
+	if(aid==0) aid = getOneItem();
+	location="archives.asp?aid="+aid+"&action=makeArchives&qstr="+qstr+"";
+}
+function checkArc(aid){
+	var qstr=getCheckboxItem();
+	if(aid==0) aid = getOneItem();
+	location="archives.asp?aid="+aid+"&action=checkArchives&qstr="+qstr+"";
+}
+function moveArc(aid){
+	var qstr=getCheckboxItem();
+	if(aid==0) aid = getOneItem();
+	location="archives.asp?aid="+aid+"&action=moveArchives&qstr="+qstr+"";
+}
+function adArc(aid){
+	var qstr=getCheckboxItem();
+	if(aid==0) aid = getOneItem();
+	location="archives.asp?aid="+aid+"&action=commendArchives&qstr="+qstr+"";
+}
+function delArc(aid){
+	var qstr=getCheckboxItem();
+	if(aid==0) aid = getOneItem();
+	location="archives.asp?aid="+aid+"&action=delArchives&qstr="+qstr+"";
+}
+
+//Get documents' name
+function getCheckboxItem()
+{
+	var allSel="";
+	if(document.form2.id.value) return document.form2.id.value;
+	for(i=0;i<document.form2.id.length;i++)
+	{
+		if(document.form2.id[i].checked)
+		{
+			if(allSel=="")
+				allSel=document.form2.id[i].value;
+			else
+				allSel=allSel+"`"+document.form2.id[i].value;
+		}
+	}
+	return allSel;
+}
+
+//Get id from one of them
+function getOneItem()
+{
+	var allSel="";
+	if(document.form2.id.value) return document.form2.id.value;
+	for(i=0;i<document.form2.id.length;i++)
+	{
+		if(document.form2.id[i].checked)
+		{
+				allSel = document.form2.id[i].value;
+				break;
+		}
+	}
+	return allSel;
+}
+function selAll()
+{
+	for(i=0;i<document.form2.id.length;i++)
+	{
+		if(!document.form2.id[i].checked)
+		{
+			document.form2.id[i].checked=true;
+		}
+	}
+}
+function noSelAll()
+{
+	for(i=0;i<document.form2.id.length;i++)
+	{
+		if(document.form2.id[i].checked)
+		{
+			document.form2.id[i].checked=false;
+		}
+	}
+}
+</script>
+</head>
+<body leftmargin="8" topmargin="8" background='skin/images/allbg.gif'>
+
+<!--  Swift transition button  -->
+<table width="98%" border="0" cellpadding="0" cellspacing="1" bgcolor="#D1DDAA" align="center">
+<tr>
+ <td height="26" background="skin/images/newlinebg3.gif">
+  <table width="98%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+  <td align="center">
+    <input type='button' class="coolbg np" onClick="location='';" value='Add Documents' />
+    <input type='button' class="coolbg np" onClick="location='';" value='My Documents' />
+    <input type='button' class='coolbg np' onClick="location='';" value='Verify Scripts' />
+    <input type='button' class="coolbg np" onClick="location='';" value='Column Management' />
+    <input type='button' class="coolbg np" onClick="location='';" value='Update List' />
+    <input type='button' class="coolbg np" onClick="location='';" value='Update Documents' />
+    <input type='button' class="coolbg np" onClick="location='';" value='Document Recycle Bin' />
+ </td>
+ </tr>
+</table>
+</td>
+</tr>
+</table>
+  
+<!--  Content   -->
+<form name="form2">
+
+<table width="98%" border="0" cellpadding="2" cellspacing="1" bgcolor="#D1DDAA" align="center" style="margin-top:8px">
+<tr bgcolor="#E7E7E7">
+	<td height="24" colspan="10" background="skin/images/tbg.gif">&nbsp;Archives List&nbsp;</td>
+</tr>
+<tr align="center" bgcolor="#FAFAF1" height="22">
+	<td width="6%">SequenceNumber</td>
+	<td width="4%">Selection</td>
+	<td width="28%">CourseName</td>
+	<td width="10%">StudentID</td>
+	<td width="10%">CourseType</td>
+	<td width="8%">Grade</td>
+	<td width="6%">Credits</td>
+	<td width="8%">Privilege</td>
+	<td width="8%">Teacher</td>
+	<td width="10%">Operation</td>
+</tr>
+
+<tr align='center' bgcolor="#FFFFFF" onMouseMove="javascript:this.bgColor='#FCFDEE';" onMouseOut="javascript:this.bgColor='#FFFFFF';" height="22" >
+	<td>5</td>
+	<td><input name="id" type="checkbox" id="id" value="101" class="np"></td>
+	<td align="left"><a href=''><u>American History </u></a></td>
+	<td>71111111</td>
+	<td>FirstTime</td>
+	<td>97</td>
+	<td>2.0</td>
+	<td>OpenBrowsing</td>
+	<td>Amy</td>
+	<td><a href="101">Edit</a> | <a href="101">Preview</a></td>
+</tr>
+
+<tr align='center' bgcolor="#FFFFFF" onMouseMove="javascript:this.bgColor='#FCFDEE';" onMouseOut="javascript:this.bgColor='#FFFFFF';" height="22" >
+	<td>5</td>
+	<td><input name="id" type="checkbox" id="id" value="100" class="np"></td>
+	<td align="left"><a href=''><u>American History </u></a></td>
+	<td>71111111</td>
+	<td>FirstTime</td>
+	<td>90</td>
+	<td>2.0</td>
+	<td>OpenBrowsing</td>
+	<td>Tom</td>
+	<td><a href="100">Edit</a> | <a href="100">Preview</a></td>
+</tr>
+
+<tr align='center' bgcolor="#FFFFFF" onMouseMove="javascript:this.bgColor='#FCFDEE';" onMouseOut="javascript:this.bgColor='#FFFFFF';" height="22" >
+	<td>5</td>
+	<td><input name="id" type="checkbox" id="id" value="99" class="np"></td>
+	<td align="left"><a href=''><u>American History </u></a></td>
+	<td>71111111</td>
+	<td>FirstTime</td>
+	<td>3</td>
+	<td>2.0</td>
+	<td>OpenBrowsing</td>
+	<td>Sam</td>
+	<td><a href="99">Edit</a> | <a href="99">Preview</a></td>
+</tr>
+
+<tr align='center' bgcolor="#FFFFFF" onMouseMove="javascript:this.bgColor='#FCFDEE';" onMouseOut="javascript:this.bgColor='#FFFFFF';" height="22" >
+	<td>5</td>
+	<td><input name="id" type="checkbox" id="id" value="98" class="np"></td>
+	<td align="left"><a href=''><u>American History</u></a></td>
+	<td>71111111</td>
+	<td>FirstTime</td>
+	<td>3</td>
+	<td>2.0</td>
+	<td>OpenBrowsing</td>
+	<td>Dell</td>
+	<td><a href="98">Edit</a> | <a href="98">Preview</a></td>
+</tr>
+
+<tr align='center' bgcolor="#FFFFFF" onMouseMove="javascript:this.bgColor='#FCFDEE';" onMouseOut="javascript:this.bgColor='#FFFFFF';" height="22" >
+	<td>5</td>
+	<td><input name="id" type="checkbox" id="id" value="97" class="np"></td>
+	<td align="left"><a href=''><u>American History</u></a></td>
+	<td>71111111</td>
+	<td>FirstTime</td>
+	<td>3</td>
+	<td>2.0</td>
+	<td>OpenBrowsing</td>
+	<td>Cloris</td>
+	<td><a href="97">Edit</a> | <a href="97">Preview</a></td>
+</tr>
+
+<tr align='center' bgcolor="#FFFFFF" onMouseMove="javascript:this.bgColor='#FCFDEE';" onMouseOut="javascript:this.bgColor='#FFFFFF';" height="22" >
+	<td>5</td>
+	<td><input name="id" type="checkbox" id="id" value="96" class="np"></td>
+	<td align="left"><a href=''><u>American History</u></a></td>
+	<td>71111111</td>
+	<td>FirstTime</td>
+	<td>3</td>
+	<td>2.0</td>
+	<td>OpenBrowsing</td>
+	<td>Nancy</td>
+	<td><a href="96">Edit</a> | <a href="96">Preview</a></td>
+</tr>
+
+<tr align='center' bgcolor="#FFFFFF" onMouseMove="javascript:this.bgColor='#FCFDEE';" onMouseOut="javascript:this.bgColor='#FFFFFF';" height="22" >
+	<td>5</td>
+	<td><input name="id" type="checkbox" id="id" value="95" class="np"></td>
+	<td align="left"><a href=''><u>American History</u></a></td>
+	<td>71111111</td>
+	<td>FirstTime</td>
+	<td>3</td>
+	<td>2.0</td>
+	<td>OpenBrowsing</td>
+	<td>Jenifer</td>
+	<td><a href="95">Edit</a> | <a href="95">Preview</a></td>
+</tr>
+
+<tr align='center' bgcolor="#FFFFFF" onMouseMove="javascript:this.bgColor='#FCFDEE';" onMouseOut="javascript:this.bgColor='#FFFFFF';" height="22" >
+	<td>5</td>
+	<td><input name="id" type="checkbox" id="id" value="94" class="np"></td>
+	<td align="left"><a href=''><u>American History</u></a></td>
+	<td>71111111</td>
+	<td>FirstTime</td>
+	<td>3</td>
+	<td>2.0</td>
+	<td>OpenBrowsing</td>
+	<td>Messi</td>
+	<td><a href="94">Edit</a> | <a href="94">Preview</a></td>
+</tr>
+
+<tr align='center' bgcolor="#FFFFFF" onMouseMove="javascript:this.bgColor='#FCFDEE';" onMouseOut="javascript:this.bgColor='#FFFFFF';" height="22" >
+	<td>5</td>
+	<td><input name="id" type="checkbox" id="id" value="93" class="np"></td>
+	<td align="left"><a href=''><u>American History</u></a></td>
+	<td>71111111</td>
+	<td>FirstTime</td>
+	<td>3</td>
+	<td>2.0</td>
+	<td>OpenBrowsing</td>
+	<td>Sundy</td>
+	<td><a href="93">Edit</a> | <a href="93">Preview</a></td>
+</tr>
+
+<tr align='center' bgcolor="#FFFFFF" onMouseMove="javascript:this.bgColor='#FCFDEE';" onMouseOut="javascript:this.bgColor='#FFFFFF';" height="22" >
+	<td>5</td>
+	<td><input name="id" type="checkbox" id="id" value="92" class="np"></td>
+	<td align="left"><a href=''><u>American History</u></a></td>
+	<td>71111111</td>
+	<td>FirstTime</td>
+	<td>3</td>
+	<td>2.0</td>
+	<td>OpenBrowsing</td>
+	<td>Ann</td>
+	<td><a href="92">Edit</a> | <a href="92">Preview</a></td>
+</tr>
+
+<tr bgcolor="#FAFAF1">
+<td height="28" colspan="10">
+	&nbsp;
+	<a href="javascript:selAll()" class="coolbg">Select All</a>
+	<a href="javascript:noSelAll()" class="coolbg">Cancel</a>
+	<a href="javascript:updateArc(0)" class="coolbg">&nbsp;Update&nbsp;</a>
+	<a href="javascript:checkArc(0)" class="coolbg">&nbsp;Verification&nbsp;</a>
+	<a href="javascript:adArc(0)" class="coolbg">&nbsp;Recommendation&nbsp;</a>
+	<a href="javascript:moveArc(0)" class="coolbg">&nbsp;Move&nbsp;</a>
+	<a href="javascript:delArc(0)" class="coolbg">&nbsp;Deletion&nbsp;</a>
+</td>
+</tr>
+<tr align="right" bgcolor="#EEF4EA">
+	<td height="36" colspan="10" align="center"><!--Page Turning --></td>
+</tr>
+</table>
+
+</form>
+
+<!--  Searching List  -->
+<form name='form3' action='' method='get'>
+<input type='hidden' name='dopost' value='' />
+<table width='98%'  border='0' cellpadding='1' cellspacing='1' bgcolor='#CBD8AC' align="center" style="margin-top:8px">
+  <tr bgcolor='#EEF4EA'>
+    <td background='skin/images/wbg.gif' align='center'>
+      <table border='0' cellpadding='0' cellspacing='0'>
+        <tr>
+          <td width='90' align='center'>Searching Condition：</td>
+          <td width='160'>
+          <select name='cid' style='width:150'>
+          <option value='0'>Selection Type...</option>
+          	<option value='1'>Name</option>
+          </select>
+        </td>
+        <td width='70'>
+          Key Word：
+        </td>
+        <td width='160'>
+          	<input type='text' name='keyword' value='' style='width:150px' />
+        </td>
+        <td width='110'>
+    		<select name='orderby' style='width:80px'>
+            <option value='id'>Sorting...</option>
+            <option value='pubdate'>Releasing Time</option>
+      	</select>
+        </td>
+        <td>
+          <input name="imageField" type="image" src="skin/images/frame/search.gif" width="45" height="20" border="0" class="np" />
+        </td>
+       </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+</form>
+</body>
+</html>

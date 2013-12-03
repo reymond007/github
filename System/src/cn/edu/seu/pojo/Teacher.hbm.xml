@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 指定Hibernate映射文件的DTD信息 -->
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Hibernate映射文件的根元素 -->
+<hibernate-mapping package="cn.edu.seu.pojo">
+	<class	name="Teacher"	table="teacher" lazy="false">
+		<!-- 映射标识属性 -->
+		<id	name="teacherId" column="teacherId" type="long">
+			<!-- 指定使用identity主键生成策略 -->
+			<generator class="sequence">
+			<param name="sequence">s_teacher</param>
+			</generator>
+		</id>
+		<!-- 映射普通属性 -->
+		<property name="teacherNumber" column="teacherNumber"
+			type="long" />
+			<property name="teacherName" column="teacherName"
+			type="string" length="50"/>
+			<property name="password" column="password"
+			type="string" length="10"/>
+			<property name="age" column="age"
+			type="integer"/>
+			<property name="sex" column="sex"
+			type="java.lang.Character" length="2"/>
+			<property name="department" column="department"
+			type="string" length="50" />
+			<property name="address" column="address"
+			type="string" length="50"/>
+			<property name="status" column="status"
+			type="string" length="50"/>
+			<property name="mailAddress" column="mailAddress"
+			type="string" length="100"/>
+			<property name="professionLevel" column="professionLevel"
+			type="string" length="10"/>
+		<set name="glesson" >
+             <key column="teacherNumber" property-ref="teacherNumber"/>
+             <one-to-many class="Glesson"/>
+           </set>
+	<!-- 	映射和AttendType的关联关系
+		<many-to-one name="type" column="type_id"
+			class="AttendType" not-null="true" lazy="false"/>
+		映射和Attend的关联关系
+		<many-to-one name="attend" column="attend_id"
+			class="Attend" not-null="true" lazy="false"/>
+		映射和CheckBack的关联关系
+		<one-to-one name="check" property-ref="app"/> -->
+	</class>
+</hibernate-mapping>

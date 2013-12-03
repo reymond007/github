@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 指定Hibernate映射文件的DTD信息 -->
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Hibernate映射文件的根元素 -->
+<hibernate-mapping package="cn.edu.seu.pojo">
+	<class	name="Cclass"	table="class">
+		<!-- 映射标识属性 -->
+		<id	name="classId" column="classId" type="long">
+			<!-- 指定使用identity主键生成策略 -->
+			<generator class="sequence">
+			<param name="sequence">s_class</param>
+			</generator>
+		</id>
+		<!-- 映射普通属性 -->
+		<property name="className" column="className"
+			type="string" length="50" />
+			<property name="departmentName" column="departmentName"
+			type="string" length="50"/>
+		
+		<set name="students" >
+			<key column="classname" property-ref="className"/>
+			<one-to-many class="Student" />
+		</set>
+		<many-to-one name="department" class="Department" column="departmentName" not-null="true" insert="false" update="false" property-ref="departmentName"/>
+	<!-- 	映射和AttendType的关联关系
+		<many-to-one name="type" column="type_id"
+			class="AttendType" not-null="true" lazy="false"/>
+		映射和Attend的关联关系
+		<many-to-one name="attend" column="attend_id"
+			class="Attend" not-null="true" lazy="false"/>
+		映射和CheckBack的关联关系
+		<one-to-one name="check" property-ref="app"/> -->
+	</class>
+</hibernate-mapping>

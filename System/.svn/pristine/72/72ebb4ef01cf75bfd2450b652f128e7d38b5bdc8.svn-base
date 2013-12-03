@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 指锟斤拷Spring锟斤拷锟斤拷锟侥硷拷锟斤拷Schema锟斤拷息 -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	http://www.springframework.org/schema/tx 
+	http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+	http://www.springframework.org/schema/aop 
+	http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
+
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
+		destroy-method="close" p:driverClass="oracle.jdbc.driver.OracleDriver"
+		p:jdbcUrl="jdbc:oracle:thin:@10.3.1.210:1521:xe" p:user="group6"
+		p:password="group6" p:maxPoolSize="40" p:minPoolSize="1"
+		p:initialPoolSize="1" p:maxIdleTime="20" />
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean"
+		p:dataSource-ref="dataSource">
+		<property name="mappingResources">
+			<list>
+				<value>cn/edu/seu/pojo/Student.hbm.xml</value>
+				<value>cn/edu/seu/pojo/Teacher.hbm.xml</value>
+				<value>cn/edu/seu/pojo/Score.hbm.xml</value>
+				<value>cn/edu/seu/pojo/Hteacher.hbm.xml</value>
+				<value>cn/edu/seu/pojo/Glesson.hbm.xml</value>
+				<value>cn/edu/seu/pojo/Department.hbm.xml</value>
+				<value>cn/edu/seu/pojo/CourseSelector.hbm.xml</value>
+				<value>cn/edu/seu/pojo/Course.hbm.xml</value>
+				<value>cn/edu/seu/pojo/Cclass.hbm.xml</value>
+			</list>
+		</property>
+		<property name="hibernateProperties">
+			<value>
+				hibernate.dialect=org.hibernate.dialect.OracleDialect
+				hibernate.show_sql=true
+				hibernate.format_sql=true
+			</value>
+		</property>
+	</bean>
+
+    <bean id="StudentInfoAction" class="cn.edu.seu.action.StudentInfoAction"
+		scope="prototype">
+		<property name="StudentInfoService" ref="StudentInfoService"></property>
+	</bean>
+	<bean id="StudentInfoService" class="cn.edu.seu.service.impl.StudentInfoServiceImpl">
+		<property name="StudentInfoDao" ref="StudentInfoDao"></property>
+	</bean>
+	<bean id="StudentInfoDao" class="cn.edu.seu.dao.impl.StudentInfoDaoImpl"
+		p:sessionFactory-ref="sessionFactory">
+	</bean>
+	
+	<bean id="TeacherInfoAction" class="cn.edu.seu.action.TeacherInfoAction"
+		scope="prototype">
+		<property name="TeacherInfoService" ref="TeacherInfoService"></property>
+	</bean>
+	<bean id="TeacherInfoService" class="cn.edu.seu.service.impl.TeacherInfoServiceImpl">
+		<property name="TeacherInfoDao" ref="TeacherInfoDao"></property>
+	</bean>
+	<bean id="TeacherInfoDao" class="cn.edu.seu.dao.impl.TeacherInfoDaoImpl"
+		p:sessionFactory-ref="sessionFactory">
+	</bean>
+	
+	<bean id="HteacherInfoAction" class="cn.edu.seu.action.HteacherInfoAction"
+		scope="prototype">
+		<property name="HteacherInfoService" ref="HteacherInfoService"></property>
+	</bean>
+	<bean id="HteacherInfoService" class="cn.edu.seu.service.impl.HteacherInfoServiceImpl">
+		<property name="HteacherInfoDao" ref="HteacherInfoDao"></property>
+	</bean>
+	<bean id="HteacherInfoDao" class="cn.edu.seu.dao.impl.HteacherInfoDaoImpl"
+		p:sessionFactory-ref="sessionFactory">
+	</bean>
+
+	<bean id="StudentAction" class="cn.edu.seu.action.StudentAction"
+		scope="prototype">
+		<property name="StudentService" ref="StudentService"></property>
+    </bean>
+	<bean id="StudentService" class="cn.edu.seu.service.impl.StudentServiceImpl">
+		<property name="StudentDao" ref="StudentDao"></property>
+	</bean>
+	<bean id="StudentDao" class="cn.edu.seu.dao.impl.StudentDaoImpl"
+		p:sessionFactory-ref="sessionFactory">
+	</bean>
+
+	<bean id = "scoreAction" 
+	class = "cn.edu.seu.action.ScoreAction" scope = "prototype">
+	<property name = "scoreService" ref = "scoreService"></property>
+	</bean>
+	
+	
+	<bean id="scoreService" class="cn.edu.seu.service.impl.ScoreServiceImpl"
+		scope="prototype">
+		<property name="scoreDao" ref="scoreDao"></property>
+	</bean>
+
+	<bean id="scoreDao" class="cn.edu.seu.dao.impl.ScoreDaoImpl"
+		p:sessionFactory-ref="sessionFactory">
+	</bean> 
+
+	<!-- 金阳韬 start -->
+    <bean id="userAction" class="cn.edu.seu.action.UserAction" scope="prototype">
+    <property name="userService">
+    <ref bean="userService"/>
+    </property>
+    </bean>
+    
+    <bean id="userService" class="cn.edu.seu.service.impl.UserServiceImpl">
+    <property name="userDao">
+    <ref bean="userDao"/>
+    </property>
+    </bean>
+       
+    <bean id="userDao" class="cn.edu.seu.dao.impl.UserDaoImpl" scope="singleton">
+    <property name="sessionFactory">
+    <ref local="sessionFactory"/>
+    </property>
+    </bean>
+    
+    <bean id="scoreMaintainAction" class="cn.edu.seu.action.ScoreMaintainAction" scope="prototype">
+    <property name="scoreMaintainService">
+    <ref bean="scoreMaintainService"/>
+    </property>
+    </bean>
+    
+    <bean id="scoreMaintainService" class="cn.edu.seu.service.impl.ScoreMaintainServiceImpl">
+    <property name="scoreMaintainDao">
+    <ref bean="scoreMaintainDao"/>
+    </property>
+    </bean>
+       
+    <bean id="scoreMaintainDao" class="cn.edu.seu.dao.impl.ScoreMaintainDaoImpl" scope="singleton">
+    <property name="sessionFactory">
+    <ref local="sessionFactory"/>
+    </property>
+    </bean>
+    <!-- 金阳韬end -->
+    <!-- sb start -->
+   
+   <bean id = "TeacherAction"
+	       class = "cn.edu.seu.action.TeacherAction">
+	       <property name = "Teacherservice" ref = "Teacherservice"></property>
+	</bean>
+	
+	<bean id = "Teacherservice" 
+	       class = "cn.edu.seu.service.impl.TeacherServiceImpl">
+	<property name = "Teacherdao" ref = "Teacherdao"></property>      
+	
+	</bean>
+	
+	
+	<bean id = "Teacherdao" 
+	       class = "cn.edu.seu.dao.impl.TeacherDaoImpl"
+	  p:sessionFactory-ref = "sessionFactory">
+	
+	</bean>
+   
+	
+	<bean id = "HteacherAction"
+	       class = "cn.edu.seu.action.HteacherAction">
+	       <property name = "Hteacherservice" ref = "Hteacherservice"></property>
+	</bean>
+	
+	<bean id = "Hteacherservice" 
+	       class = "cn.edu.seu.service.impl.HteacherServiceImpl">
+	<property name = "Hteacherdao" ref = "Hteacherdao"></property>      
+	
+	</bean>
+	
+	
+	<bean id = "Hteacherdao" 
+	       class = "cn.edu.seu.dao.impl.HteacherDaoImpl"
+	  p:sessionFactory-ref = "sessionFactory">
+	
+	</bean>
+
+  
+
+	<bean id="courseAction" 
+	 class="cn.edu.seu.action.CourseAction">
+	 <property name = "courseService" ref = "courseService"></property>  
+	 </bean>
+	 <bean id="courseService" 
+	 class="cn.edu.seu.service.impl.CourseServiceImpl">
+	 <property name = "courseDao" ref = "courseDao"></property>  
+	 </bean>
+	 <bean id="courseDao" 
+	 class="cn.edu.seu.dao.impl.CourseDaoImpl" 
+	 p:sessionFactory-ref = "sessionFactory">
+	   
+	 </bean>
+   
+    
+    <!-- sb end -->
+	<bean id="transactionManager" class=
+		"org.springframework.orm.hibernate3.HibernateTransactionManager"
+		p:sessionFactory-ref="sessionFactory"/>
+
+	<!-- <tx:advice id="txAdvice" transaction-manager="transactionManager"> 
+		<tx:attributes> <tx:method name="get*" read-only="true"/> <tx:method name="*"/> 
+		</tx:attributes> </tx:advice> <aop:config> <aop:pointcut id="leePointcut" 
+		expression="bean(empManager)||bean(mgrManager)"/> <aop:advisor advice-ref="txAdvice" 
+		pointcut-ref="leePointcut"/> </aop:config> -->
+</beans>

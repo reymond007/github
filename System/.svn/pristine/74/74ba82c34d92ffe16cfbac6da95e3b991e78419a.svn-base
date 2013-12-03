@@ -1,0 +1,17 @@
+package cn.edu.seu.dao;
+
+import java.util.List;
+
+import cn.edu.seu.pojo.AddScore;
+import cn.edu.seu.pojo.Course;
+import cn.edu.seu.pojo.Score;
+import cn.edu.seu.pojo.Student;
+
+public interface ScoreMaintainDao {
+List<AddScore> selectStudentByCourse(String courseName,Long teacherNumber);
+boolean addScore(Score score);
+boolean deleteScore(Score score);
+boolean updateScore(Score score);
+List<Score> selectScoreByCourse(String courseName,Long teacherNumber);
+List<Course> selectCourseByName(String courseName);
+}

@@ -1,0 +1,150 @@
+<html>
+<head>
+<title>menu</title>
+<link rel="stylesheet" href="skin/css/base.css" type="text/css" />
+<link rel="stylesheet" href="skin/css/menu.css" type="text/css" />
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<script language='javascript'>var curopenItem = '1';</script>
+<script language="javascript" type="text/javascript" src="skin/js/frame/menu.js"></script>
+<base target="main" />
+</head>
+<body target="main">
+<table width='99%' height="100%" border='0' cellspacing='0' cellpadding='0'>
+  <tr>
+    <td style='padding-left:3px;padding-top:8px' valign="top">
+	<!-- Item 1 Strat -->
+      <dl class='bitem'>
+        <dt onClick='showHide("items1_1")'><b>学生信息管理</b></dt>
+        <dd style='display:block' class='sitem' id='items1_1'>
+          <ul class='sitemu'>
+            <li>
+              <div class='items'>
+                <div class='fllct'><a href='addStudent.jsp' target='main'>添加学生信息</a></div>
+                
+              </div>
+            </li>
+          
+            <li>
+              <div class='items'>
+                <div class='fllct'><a href='updateStudent.jsp' target='main'>修改学生信息</a></div>
+                
+              </div>
+            </li>
+            <li>
+              <div class='items'>
+                <div class='fllct'><a href='deleteStudent.jsp' target='main'>删除学生信息</a></div>
+               
+              </div>
+            </li>
+           
+            
+          </ul>
+        </dd>
+      </dl>
+      <dl class='bitem'>
+        <dt onClick='showHide("items1_2")'><b>教师信息管理</b></dt>
+        <dd style='display:block' class='sitem' id='items1_2'>
+          <ul class='sitemu'>
+            <li>
+              <div class='items'>
+                <div class='fllct'><a href='addTeacher.jsp' target='main'>添加教师信息</a></div>
+                
+              </div>
+            </li>
+          
+            <li>
+              <div class='items'>
+                <div class='fllct'><a href='updateTeacher.jsp' target='main'>修改教师信息</a></div>
+                
+              </div>
+            </li>
+            <li>
+              <div class='items'>
+                <div class='fllct'><a href='deleteTeacher.jsp' target='main'>删除教师信息</a></div>
+               
+              </div>
+            </li>
+           
+            
+          </ul>
+        </dd>
+      </dl>
+      <dl class='bitem'>
+        <dt onClick='showHide("items1_3")'><b>教务员信息管理</b></dt>
+        <dd style='display:block' class='sitem' id='items1_3'>
+          <ul class='sitemu'>
+            <li>
+              <div class='items'>
+                <div class='fllct'><a href='addHteacher.jsp' target='main'>添加教务员信息</a></div>
+                
+              </div>
+            </li>
+          
+            <li>
+              <div class='items'>
+                <div class='fllct'><a href='updateHteacher.jsp' target='main'>修改教务员信息</a></div>
+                
+              </div>
+            </li>
+            <li>
+              <div class='items'>
+                <div class='fllct'><a href='deleteHteacher.jsp' target='main'>删除学生信息</a></div>
+               
+              </div>
+            </li>
+           
+            
+          </ul>
+        </dd>
+      </dl>
+       <dl class='bitem'>
+        <dt onClick='showHide("items1_4")'><b>课程管理</b></dt>
+        <dd style='display:block' class='sitem' id='items1_4'>
+          <ul class='sitemu'>
+            <li>
+              <div class='items'>
+                <div class='fllct'><a href='addCourse.jsp' target='main'>添加课程</a></div>
+                
+              </div>
+            </li>
+          
+            <li>
+              <div class='items'>
+                <div class='fllct'><a href='updateCourse.jsp' target='main'>修改课程</a></div>
+                
+              </div>
+            </li>
+            <li>
+              <div class='items'>
+                <div class='fllct'><a href='searchCourse.jsp' target='main'>查询课程</a></div>
+               
+              </div>
+            </li>
+            <li>
+              <div class='items'>
+                <div class='fllct'><a href='deleteCourse.jsp' target='main'>删除课程</a></div>
+               
+              </div>
+            </li>
+            
+          </ul>
+        </dd>
+      </dl>
+      <!-- Item 1 End -->
+      <!-- Item 2 Strat -->
+     
+       <dl class='bitem'>
+        <dt onClick='showHide("items2_1")'><b>系统帮助</b></dt>
+        <dd style='display:block' class='sitem' id='items2_1'>
+          <ul class='sitemu'>
+            <li><a href='http://www.865171.cn' target='_blank'>官方网站</a></li>
+            <li><a href='http://www.865171.cn/admin-templates/' target='_blank'>更多后台模板</a></li>
+          </ul>
+        </dd>
+      </dl>
+      <!-- Item 2 End -->
+	  </td>
+  </tr>
+</table>
+</body>
+</html>

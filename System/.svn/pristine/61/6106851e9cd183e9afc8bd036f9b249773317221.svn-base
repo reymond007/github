@@ -1,0 +1,174 @@
+package cn.edu.seu.dao.impl;
+
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.hibernate.HibernateException;
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.springframework.orm.hibernate3.HibernateCallback;
+import org.springframework.orm.hibernate3.LocalSessionFactoryBean;
+import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
+
+import cn.edu.seu.dao.ScoreDao;
+import cn.edu.seu.pojo.*;
+
+public class ScoreDaoImpl extends HibernateDaoSupport implements ScoreDao {
+	
+	private PageBean pagination;
+  private  static  int count=0;
+	public PageBean getPagination() {
+		return pagination;
+	}
+
+	public void setPagination(PageBean pagination) {
+		this.pagination = pagination;
+	}
+
+	public List inquireScore(String className,String lesson,final int offet,final int length) {
+		String[] args = { "%"+lesson+"%", "%"+className+"%" };
+
+		String sql = " from Score s where s.courseName like '%"+lesson+"%' and s.student.className like '%"+className+"%'";
+		 Session session=this.getSession();
+		   Query query = session.createQuery(sql);
+		   count=query.list().size();
+		 List list=query.setFirstResult(offet).setMaxResults(length).list();
+		// TODO: implement
+		return list;
+		// TODO: implement
+	
+	}
+
+	/** @pdOid 7ae9f7d7-023d-4faf-9199-4463f2c37cc3 */
+	public List inquireAverageScore(String department,String lesson,final int offet,final int length) {
+		// TODO: implement
+		//String[] args = { "%"+lesson+"%", "%"+department+"%" };
+		
+		ScoreList scoreList=new ScoreList();
+		String sql = " select s.student.cclass.departmentName,s.student.className,s.courseName, avg(score)from Score s where s.courseName like '%"+lesson+"%' and s.student.cclass.department like '%"+department+"%'"+"group by s.student.cclass.departmentName,s.student.className,s.courseName";
+		 Session session=this.getSession();
+		   Query query = session.createQuery(sql);
+		   count=query.list().size();
+		 List list=query.setFirstResult(offet).setMaxResults(length).list();
+		    List theList=new ArrayList();
+		   for(int i=0;i< list.size();i++){
+		   Object[] object = (Object[]) list.get(i);
+		   for(int j=0;j<object.length;j++){
+		   if(j==0){
+		   String departmentName = (String)object[j];
+		   String className=(String)object[j+1];
+		   String courseName=(String)object[j+2];
+		  double score = (Double)object[j+3];
+		   scoreList.setClassName(className);
+		   scoreList.setCourseName(courseName);
+		   scoreList.setDepartmentName(departmentName);
+		   scoreList.setScore(score);
+		   theList.add(scoreList);
+
+		   }
+		   }
+		   }
+	   
+
+
+		// TODO: implement
+		return theList;
+	}
+
+	/** @pdOid 85600d15-33a7-41e9-b774-720b49b3b397 */
+	public List inquirePassScore(String department,String lesson,final int offet,final int length) {
+		String[] args = { "%"+lesson+"%", "%"+department+"%" };
+
+		String sql = "  from Score s where s.courseName like  '%"+lesson+"%'and s.score<60 and s.student.cclass.departmentName like '%"+department+"%'";
+		 Session session=this.getSession();
+		   Query query = session.createQuery(sql);
+		   count=query.list().size();
+		 List list=query.setFirstResult(offet).setMaxResults(length).list();
+		// TODO: implement
+		return list;
+	}
+
+	/** @pdOid 2e233478-978c-4d64-b09e-dcb30532ce29 */
+	public List inquireTotalScore(String department, String lesson ,final int offet,final int length) {
+		
+		String[] args = {lesson, department};
+		
+		//String sql = " from Score s where s.courseName=? and s.studentNumber in(select studentNumber from Student "
+		//		+ "where className in( select className from Cclass where departmentName=? ))";
+		String sql = "  from Score s where s.courseName like  '%"+lesson+"%' and s.student.cclass.departmentName like '%"+department+"%'";
+		
+		 Session session=this.getSession();
+		   Query query = session.createQuery(sql);
+		   count=query.list().size();
+		 List list=query.setFirstResult(offet).setMaxResults(length).list();
+     System.out.println(count);
+	//ScoreDaoImpl sdl=new ScoreDaoImpl();
+	//List list=sdl.findByPage(sql, 0, 10);
+
+
+
+		return list;
+	}
+	public int getAllCount()
+	{
+		return count;
+	}
+
+	/** @pdOid 2b20f134-960a-4a33-a19e-4bd6903e0e78 */
+	public List inquireSortScore(String department,String lesson,final int offet,final int length) {
+		String[] args = { "%"+lesson+"%", "%"+department+"%" };
+
+		String sql = " from Score s where s.courseName like '%"+lesson+"%' and s.student.cclass.departmentName like '%"+department+"%' order by s.score";
+		 Session session=this.getSession();
+		   Query query = session.createQuery(sql);
+		   count=query.list().size();
+		 List list=query.setFirstResult(offet).setMaxResults(length).list();
+	
+
+		return list;
+	}
+
+	public String findDeparmentByClass(String className)
+	{
+		String sql="from Cclass c wher c.className like ?";
+		String[] args={className+"%"};
+		List list=this.getHibernateTemplate().find(sql,args);
+		String departmentName=((Cclass)list.get(0)).getDepartmentName();
+		return departmentName;
+		
+		
+	}
+	 public String findTeacherByNum(long teacherNumber)
+	 {
+		 String sql="from Teacher t wher t.teacheNumber=?";
+			Long[] args={teacherNumber};
+			List list=this.getHibernateTemplate().find(sql,args);
+			String teacherName=((Teacher)list.get(0)).getTeacherName();
+			return teacherName;
+		 
+	 }
+	 public  List findByPage(final String hql, 
+				final int offset, final int pageSize)
+			{
+				//通过一个HibernateCallback对象来执行查询
+				List list = getHibernateTemplate()
+					.executeFind(new HibernateCallback()
+				{
+					//实现HibernateCallback接口必须实现的方法
+					public Object doInHibernate(Session session)
+						throws HibernateException, SQLException
+					{
+						//执行Hibernate分页查询
+						List result = session.createQuery(hql)
+							.setFirstResult(offset)
+							.setMaxResults(pageSize)
+							.list();
+						return result;
+					}
+				});
+				return list;
+			}
+	
+}

@@ -1,0 +1,79 @@
+<%@ page language="java" contentType="text/html; charset=utf-8"
+    pageEncoding="utf-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>登陆</title>
+<link href="images/login.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+
+<script type="text/javascript">
+function reloadVerifyCode()
+{
+  var timenow = new Date().getTime();      
+  document.getElementById("safecode").src="<%=request.getContextPath()%>/VerificationCode_exec?d="+timenow;   
+  
+                 
+}
+function userName()
+{
+alert("dd");
+}
+</script>
+<form action="user_login" method="post">
+	
+	     <div id="top">
+		      <div id="top_left"><img src="images/login_03.gif" /></div>
+			  <div id="top_center"></div>
+		 </div>
+		 
+		 <div id="center">
+		      <div id="center_left"></div>
+			  <div id="center_middle">
+              	   <div id="choose_user">登陆类型
+			        <select>
+					<option value="student">学生</option>
+					<option value="teacher">老师</option>
+					<option value="eteacher">教务员</option>				
+					</select>
+
+			       </div>
+			       <div id="user">用户名
+			         <input type="text" name="user.name" onBlur="userName()"><br>
+			       </div>
+				   <div id="password">密码
+				     <input type="text" name="user.pwd"><br>
+				   </div>
+                    <div id="identify">验证码
+				      <INPUT class=regtxt style="width:100px;" title=“请输入验证码”   maxLength=5 size=16
+name="user.verificationCode" id="verify"><br>
+                      <a href="javascript:reloadVerifyCode()">
+<img src="<%=request.getContextPath()%>/VerificationCode_exec" id="safecode" />
+</a>
+		          <div id="dd">
+		          <input type="submit" value="登陆"></input><br></br>
+		          <input type="reset" value="重置"></input>
+		          </div>
+                   
+			   
+			  
+			  </div>
+			  <div id="center_right"></div>		 
+		 </div>
+		 <div id="down">
+		      <div id="down_left">
+			      <div id="inf">
+                       <span class="inf_text"></span>
+					   <span class="copyright">2012 v1.0</span>
+			      </div>
+			  </div>
+			  <div id="down_center"></div>		 
+		 </div>
+
+	</div>
+	
+</body>
+</html>

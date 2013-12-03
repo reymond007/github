@@ -1,0 +1,44 @@
+<%@ page language="java" contentType="text/html; charset=utf-8"
+    pageEncoding="utf-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<%@taglib prefix="s" uri="/struts-tags"%>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Insert title here</title>
+</head>
+<body>
+<form name="form2" action="scoreMaintain_updateScore">
+
+<table width="98%" border="0" cellpadding="2" cellspacing="1" bgcolor="#D1DDAA" align="center" style="margin-top:8px">
+<tr bgcolor="#E7E7E7">
+	<td height="24" colspan="10" background="skin/images/tbg.gif">&nbsp;成绩录入&nbsp;</td>
+</tr>
+<tr align="center" bgcolor="#FAFAF1" height="22">
+	<td width="10%">编号</td>
+	<td width="13%">学号</td>
+	<td width="9%">课程</td>
+	<td width="17%">成绩</td>
+	<td width="9%">绩点</td>
+</tr>
+
+<s:iterator value="scoreList" status="stat">
+<tr align='center' bgcolor="#FFFFFF" onMouseMove="javascript:this.bgColor='#FCFDEE';" onMouseOut="javascript:this.bgColor='#FFFFFF';" height="22" >
+	<td><s:property value="#stat.index"/></td>
+    <td><input name=<s:property value="%{'scoreList['+#stat.index+'].studentNumber'}"/>  type="text"  value=<s:property value="studentNumber"/> class="np"></td>
+	<td><input type="text" name=<s:property value="%{'scoreList['+#stat.index+'].courseName'}"/> type="text" value=<s:property value="#session.courseName"/> readonly="readonly"></td>
+	<td><input name=<s:property value="%{'scoreList['+#stat.index+'].score'}"/>  type="text"  value=<s:property value="score"/> class="np"></td>
+	<td><input name=<s:property value="%{'scoreList['+#stat.index+'].basePoint'}"/>  type="text"  value=<s:property value="basePoint"/> class="np"></td>
+    <td><input name=<s:property value="%{'scoreList['+#stat.index+'].teacherNumber'}"/> type="hidden" value=<s:property value="teacherNumber"/>></td>
+	<td><input name=<s:property value="%{'scoreList['+#stat.index+'].scoreId'}"/> type="hidden" value=<s:property value="scoreId"/>></td>
+</tr>
+</s:iterator>
+</table>
+<input type="submit" value="提交"><br>
+</form>
+<form action="scoreMaintain_selectScoreByCourse">
+课程：<input type="text" name="courseName">
+<input type="submit" value="搜索"><br>
+</form>
+</body>
+</html>

@@ -1,0 +1,17 @@
+package cn.edu.seu.service;
+
+import java.util.List;
+
+public interface ScoreService {
+	 List inquireScore(String classNamet,String lesson);
+	   /** @pdOid 8ecd30e9-7ff5-40f1-8ceb-8b72d3680b2c */
+	   List inquireAverageScore(String department,String lesson);
+	   /** @pdOid 6433c7a9-1c5a-411f-b89c-ea762e26377b */
+	   List inquirePassScore(String department,String lesson);
+	   /** @pdOid aaa3c147-074b-424d-93ff-ae97669966bd */
+	   List inquireTotalScore(String department,String lesson);
+	   /** @pdOid 6fd02d21-ac68-4053-98f7-9023c65271d0 */
+	   List inquireSortScore(String department,String lesson);
+ 
+
+}

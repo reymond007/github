@@ -1,0 +1,31 @@
+<%@ page language="java" contentType="text/html; charset=utf-8"
+    pageEncoding="utf-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Login Page</title>
+</head>
+<script type="text/javascript">
+function reloadVerifyCode()
+{
+  var timenow = new Date().getTime();      
+  document.getElementById("safecode").src="<%=request.getContextPath()%>/VerificationCode_exec?d="+timenow;                  
+}
+</script>
+
+<body>
+<form action="user_login" method="post" id="login">
+用户名：<input type="text" name="user.name"><br>
+密码：&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="user.pwd"><br>
+ 验证码：<INPUT class=regtxt style="width:100px;" title=请输入验证码  maxLength=5 size=16
+name="user.verificationCode" id="verify"><br>
+<a href="javascript:reloadVerifyCode()">
+<img src="<%=request.getContextPath()%>/VerificationCode_exec" id="safecode" />
+</a>
+<input type="submit" value="提交">
+<input type="reset" value="重置"><br>
+</form>
+</body>
+</html>
+

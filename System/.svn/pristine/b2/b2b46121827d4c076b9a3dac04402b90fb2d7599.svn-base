@@ -1,0 +1,234 @@
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8" contentType="text/html; charset=utf-8"%>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<%@taglib prefix="s" uri="/struts-tags"%>
+<title>add score</title>
+<link rel="stylesheet" type="text/css" href="skin/css/base.css">
+<script language="javascript">
+function viewArc(aid){
+	if(aid==0) aid = getOneItem();
+	window.open("archives.asp?aid="+aid+"&action=viewArchives");
+}
+function editArc(aid){
+	if(aid==0) aid = getOneItem();
+	location="archives.asp?aid="+aid+"&action=editArchives";
+}
+function updateArc(aid){
+	var qstr=getCheckboxItem();
+	if(aid==0) aid = getOneItem();
+	location="archives.asp?aid="+aid+"&action=makeArchives&qstr="+qstr+"";
+}
+function checkArc(aid){
+	var qstr=getCheckboxItem();
+	if(aid==0) aid = getOneItem();
+	location="archives.asp?aid="+aid+"&action=checkArchives&qstr="+qstr+"";
+}
+function moveArc(aid){
+	var qstr=getCheckboxItem();
+	if(aid==0) aid = getOneItem();
+	location="archives.asp?aid="+aid+"&action=moveArchives&qstr="+qstr+"";
+}
+function adArc(aid){
+	var qstr=getCheckboxItem();
+	if(aid==0) aid = getOneItem();
+	location="archives.asp?aid="+aid+"&action=commendArchives&qstr="+qstr+"";
+}
+function delArc(aid){
+	var qstr=getCheckboxItem();
+	if(aid==0) aid = getOneItem();
+	location="archives.asp?aid="+aid+"&action=delArchives&qstr="+qstr+"";
+}
+
+//���ѡ���ļ����ļ���
+function getCheckboxItem()
+{
+	var allSel="";
+	if(document.form2.id.value) return document.form2.id.value;
+	for(i=0;i<document.form2.id.length;i++)
+	{
+		if(document.form2.id[i].checked)
+		{
+			if(allSel=="")
+				allSel=document.form2.id[i].value;
+			else
+				allSel=allSel+"`"+document.form2.id[i].value;
+		}
+	}
+	return allSel;
+}
+
+//���ѡ������һ���id
+function getOneItem()
+{
+	var allSel="";
+	if(document.form2.id.value) return document.form2.id.value;
+	for(i=0;i<document.form2.id.length;i++)
+	{
+		if(document.form2.id[i].checked)
+		{
+				allSel = document.form2.id[i].value;
+				break;
+		}
+	}
+	return allSel;
+}
+function selAll()
+{
+	for(i=0;i<document.form2.id.length;i++)
+	{
+		if(!document.form2.id[i].checked)
+		{
+			document.form2.id[i].checked=true;
+		}
+	}
+}
+function noSelAll()
+{
+	for(i=0;i<document.form2.id.length;i++)
+	{
+		if(document.form2.id[i].checked)
+		{
+			document.form2.id[i].checked=false;
+		}
+	}
+}
+
+function checkScore()
+{
+		var score = document.getElementById("score").value;
+		var regu = "^[0-9]+$";
+		var re = new RegExp(regu);
+		if(score.search(re)==-1)
+		{ 
+		alert("成绩必须为数字");
+		   // document.getElementById("scoreError").innerHTML= "成绩必须为数字";
+		}
+		else if(score > 100)
+		{
+		alert("成绩不能大于100");
+		   // document.getElementById("scoreError").innerHTML= "成绩不能大于100";
+		}
+}
+function checkBasePoint()
+{
+        var basePoint = document.getElementById("basePoint").value;
+        //var regu = "^[0-9]+[\.][0-9]{0,1}+$";
+        var regu = "^[0-9]+$";
+        var re = new RegExp(regu);
+        if(!re.test(basePoint))
+        {
+        alert("绩点必须为一位小数");
+           //document.getElementById("basePointError").innerHTML= "绩点必须为一位小数";
+        }
+        else if(basePoint > 5 )
+        {
+        alert("绩点必须小于5");
+           //document.getElementById("basePointError").innerHTML= "绩点必须小于5";
+        }
+}
+</script>
+</head>
+<body leftmargin="8" topmargin="8" background='skin/images/allbg.gif'>
+
+<table width="98%" border="0" cellpadding="0" cellspacing="1" bgcolor="#D1DDAA" align="center">
+<tr>
+ <td height="26" background="skin/images/newlinebg3.gif">
+  <table width="98%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+ </tr>
+</table>
+</td>
+</tr>
+</table>
+  
+<!--  �����б�   -->
+<s:form name="form2" action="scoreMaintain_addScore" theme="simple">
+
+<table width="98%" border="0" cellpadding="2" cellspacing="1" bgcolor="#D1DDAA" align="center" style="margin-top:8px">
+<tr bgcolor="#E7E7E7">
+	<td height="24" colspan="10" background="skin/images/tbg.gif">&nbsp;成绩录入&nbsp;</td>
+</tr>
+<tr align="center" bgcolor="#FAFAF1" height="22">
+	<td width="15%">编号</td>
+	<td width="15%">选择</td>
+	<td width="20%">学号</td>
+	<td width="20%">姓名</td>
+	<td width="10%">课程</td>
+	<td width="10%">成绩</td>
+	<td width="10%">绩点</td>
+</tr>
+<!-- 
+<s:iterator value="studentList" status="stat">
+<tr align='center' bgcolor="#FFFFFF" onMouseMove="javascript:this.bgColor='#FCFDEE';" onMouseOut="javascript:this.bgColor='#FFFFFF';" height="22" >
+	<td><s:property value="#stat.index"/></td>
+	<td><input name="id" type="checkbox" id="id" value="101" class="np"></td>
+    <td><input name=<s:property value="%{'scoreList['+#stat.index+'].studentNumber'}"/>  type="text"  value=<s:property value="studentNumber"/> class="np" id="studentNumber"></td>
+	<td><s:property value="studentName"/></td>
+	<td><input type="text" name=<s:property value="%{'scoreList['+#stat.index+'].courseName'}"/> type="text" value=<s:property value="#session.courseName"/> readonly="readonly"></td>
+	<td><s:textfield name="%{'scoreList['+#stat.index+'].score'}" id="score" onBlur="checkScore()"/></td>
+	<div id="scoreError" style="color:red;font-weight:bold" ></div>
+	<td><s:textfield name="%{'scoreList['+#stat.index+'].basePoint'}" id="basePoint" onBlur="checkBasePoint()"></s:textfield></td>
+	<div id="basePointError" style="color:red;font-weight:bold" ></div>
+	<td><input name=<s:property value="%{'scoreList['+#stat.index+'].teacherNumber'}"/>  type="text"  value=<s:property value="#session.user.name"/> class="np"></td>
+</tr>
+</s:iterator>
+-->
+<s:iterator value="addScoreList" status="stat">
+<tr align='center' bgcolor="#FFFFFF" onMouseMove="javascript:this.bgColor='#FCFDEE';" onMouseOut="javascript:this.bgColor='#FFFFFF';" height="22" >
+	<td><s:property value="#stat.index"/></td>
+	<td><input name="id" type="checkbox" id="id" value="101" class="np"></td>
+    <td><input name=<s:property value="%{'scoreList['+#stat.index+'].studentNumber'}"/>  type="text"  value=<s:property value="studentNumber"/> class="np" id="studentNumber"></td>
+	<td><s:property value="studentName"/></td>
+	<td><input type="text" name=<s:property value="%{'scoreList['+#stat.index+'].courseName'}"/> type="text" value=<s:property value="#session.courseName"/> readonly="readonly"></td>
+	<td><s:textfield name="%{'scoreList['+#stat.index+'].score'}" id="score" onBlur="checkScore()"/></td>
+	<div id="scoreError" style="color:red;font-weight:bold" ></div>
+	<td><s:textfield name="%{'scoreList['+#stat.index+'].basePoint'}" id="basePoint" onBlur="checkBasePoint()"></s:textfield></td>
+	<div id="basePointError" style="color:red;font-weight:bold" ></div>
+	<td><input name=<s:property value="%{'scoreList['+#stat.index+'].teacherNumber'}"/>  type="hidden"  value=<s:property value="#session.user.name"/> class="np"></td>
+	<td><input name=<s:property value="%{'scoreList['+#stat.index+'].scoreId'}"/>  type="hidden"  value=<s:property value="scoreId"/> class="np"></td>
+</tr>
+</s:iterator>
+</table>
+<input type="submit" value="提交">
+</s:form>
+
+<form name='form3' action='scoreMaintain_selectStudentByCourse' method='get'>
+<input type='hidden' name='dopost' value='' />
+<table width='98%'  border='0' cellpadding='1' cellspacing='1' bgcolor='#CBD8AC' align="center" style="margin-top:8px">
+  <tr bgcolor='#EEF4EA'>
+    <td background='skin/images/wbg.gif' align='center'>
+      <table border='0' cellpadding='0' cellspacing='0'>
+        <tr>
+          <!--<td width='90' align='center'>���������</td>
+          <td width='160'>
+          <select name='cid' style='width:150'>
+          <option value='0'>ѡ������...</option>
+          	<option value='1'>���</option>
+          </select>          
+        </td>-->
+        <td width='70'>
+          课程名：
+        </td>
+        <td width='160'>
+          	<input type='text' name='courseName' style='width:150px' />
+        </td>
+        <!-- <td width='110'>
+    		<select name='orderby' style='width:80px'>
+            <option value='id'>����...</option>
+            <option value='pubdate'>����ʱ��</option>
+      	</select>
+        </td>
+        -->
+        <td>
+          <input value="搜索" type="submit" width="45" height="20" border="0" class="np" />
+        </td>
+       </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+</form>
+</body>
+</html>

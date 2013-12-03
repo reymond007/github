@@ -1,0 +1,80 @@
+package cn.edu.seu.service.impl;
+
+import java.util.List;
+
+import javax.transaction.HeuristicMixedException;
+import javax.transaction.HeuristicRollbackException;
+import javax.transaction.RollbackException;
+import javax.transaction.Synchronization;
+import javax.transaction.SystemException;
+import javax.transaction.Transaction;
+import javax.transaction.xa.XAResource;
+
+import org.apache.tomcat.dbcp.pool.impl.GenericKeyedObjectPool.Config;
+import org.hibernate.Session;
+import org.springframework.beans.factory.annotation.Configurable;
+import org.springframework.context.annotation.Configuration;
+
+import cn.edu.seu.dao.ScoreMaintainDao;
+import cn.edu.seu.pojo.AddScore;
+import cn.edu.seu.pojo.Score;
+import cn.edu.seu.pojo.Student;
+import cn.edu.seu.pojo.User;
+import cn.edu.seu.service.ScoreMaintainService;
+
+public class ScoreMaintainServiceImpl implements ScoreMaintainService{
+
+	private ScoreMaintainDao scoreMaintainDao;
+	public ScoreMaintainDao getScoreMaintainDao() {
+		return scoreMaintainDao;
+	}
+	public void setScoreMaintainDao(ScoreMaintainDao scoreMaintainDao) {
+		this.scoreMaintainDao = scoreMaintainDao;
+	}
+	@Override
+	public boolean addScore(List<Score> scoreList) {
+		// TODO Auto-generated method stub
+		System.out.println("addscore service start!");
+		for(Score score:scoreList)
+		{
+			scoreMaintainDao.addScore(score);
+		}
+		return true;
+	}
+	public List<AddScore> selectStudentByCourse(String courseName,User user) {
+		// TODO Auto-generated method stub
+		System.out.println("selectStudentByCourse service start!");
+		int i = user.getJurisdiction();
+		Long teacherNumber = user.getName();
+		return scoreMaintainDao.selectStudentByCourse(courseName,teacherNumber);
+	}
+	@Override
+	public boolean deleteScore(List<Score> scoreList) {
+		// TODO Auto-generated method stub
+		System.out.println("deletescore service start!");
+		for(Score score:scoreList)
+		{
+			scoreMaintainDao.deleteScore(score);
+		}
+		return true;
+	}
+	@Override
+	public boolean updateScore(List<Score> scoreList) {
+		// TODO Auto-generated method stub
+		System.out.println("updatescore service start!");
+		for(Score score:scoreList)
+		{
+			scoreMaintainDao.updateScore(score);
+		}
+		return true;
+	}
+	@Override
+	public List<Score> selectScoreByCourse(String courseName, User user) {
+		// TODO Auto-generated method stub
+		System.out.println("selectStudentByCourse service start!");
+		int i = user.getJurisdiction();
+		Long teacherNumber = user.getName();
+		return scoreMaintainDao.selectScoreByCourse(courseName, teacherNumber);
+	}
+
+}

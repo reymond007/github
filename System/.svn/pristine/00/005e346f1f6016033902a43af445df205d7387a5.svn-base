@@ -1,0 +1,62 @@
+<%@ page language="java" contentType="text/html; charset=utf-8"
+    pageEncoding="utf-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>登陆</title>
+<link href="images/login.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+
+    <div id="login">
+	
+	     <div id="top">
+		      <div id="top_left"><img src="images/login_03.gif" /></div>
+			  <div id="top_center"></div>
+		 </div>
+		 
+		 <div id="center">
+		      <div id="center_left"></div>
+			  <div id="center_middle">
+              	   <div id="choose_user">身     份
+			        <select>
+					<option value="student">学生</option>
+					<option value="teacher">教师</option>
+					<option value="eteacher">教务员</option>				
+					</select>
+
+			       </div>
+			       <div id="user">用户名<input type="text" name="user.name">
+			       </div>
+				   <div id="password">密&nbsp;&nbsp;&nbsp;&nbsp;码<input type="text" name="user.pwd">
+				   </div>
+                    <div id="identify">验证码
+				      <input type="text" class="regtxt"  title="请输入验证码" name="user.verificationCode" id="verify"><br>
+                      <a href="javascript:reloadVerifyCode()"><img src="<%=request.getContextPath()%>/VerificationCode_exec" id="safecode" /></a>
+		           </div>
+
+			    <div id="btn">
+			   <br></br>
+                    <input type="submit" value="登陆"></input>
+		           
+                
+                </div>
+			  
+			  </div>
+			  <div id="center_right"></div>		 
+		 </div>
+		 <div id="down">
+		      <div id="down_left">
+			      <div id="inf">
+                       <span class="inf_text">版本信息</span>
+					   <span class="copyright">成绩管理系统 2012 v1.0</span>
+			      </div>
+			  </div>
+			  <div id="down_center"></div>		 
+		 </div>
+
+	</div>
+</body>
+</html>

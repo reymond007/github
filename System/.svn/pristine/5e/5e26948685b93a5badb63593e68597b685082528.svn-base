@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 指定Struts2配置文件的DTD信息 -->
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.1.7//EN"
+	"http://struts.apache.org/dtds/struts-2.1.7.dtd">
+<!-- Struts2配置文件的根元素 -->
+<struts>
+	<!-- 配置了系列常量 -->
+	<constant name="struts.custom.i18n.resources" value="resource" />
+	<constant name="struts.i18n.encoding" value="utf-8" />
+	<constant name="struts.devMode" value="true" />
+	<package name="default" extends="struts-default">
+
+         <action name="ScoreConfirm" method="showScore" class="cn.edu.seu.action.ScoreMaintainAction">
+         <result name="success">/converterTest/showScore.jsp</result>
+         </action>
+         <action name="studentInfo_*" method="{1}" class="StudentInfoAction">
+			<result name = "success">/success.jsp</result>
+			<result name = "sturesult">/MyWebsite/updateStudent.jsp</result>			
+		</action>
+		<action name="teacherInfo_*" method="{1}" class="TeacherInfoAction">
+			<result name = "success">/success.jsp</result>
+			<result name = "tearesult">/MyWebsite/updateTeacher.jsp</result>			
+		</action>
+		<action name="hteacherInfo_*" method="{1}" class="HteacherInfoAction">
+			<result name = "success">/success.jsp</result>
+			<result name = "hteresult">/MyWebsite/updateHteacher.jsp</result>			
+		</action>
+		<action name="student_*" method="{1}" class="StudentAction">
+			<result name = "success">/success.jsp</result>
+			<result name = "result">/result.jsp</result>
+			<result name = "studentScore">/student/studentScore.jsp</result>
+			
+		</action>
+		<action name="score_*" method="{1}" class="scoreAction">
+		    
+		 <result name = "total">/MyWebsite/scoreStatics.jsp</result> 
+		  <result name = "sort">/MyWebsite/sortStatics.jsp</result> 
+		   <result name = "lesson">/MyWebsite/lessonStatics.jsp</result> 
+		    <result name = "pass">/MyWebsite/passStatics.jsp</result> 
+		     <result name = "average">/MyWebsite/averageStatics.jsp</result> 
+			
+			
+		</action>
+        <action name="user_*" method="{1}" class="cn.edu.seu.action.UserAction">
+            <result name="error">/MyWebsite/login.jsp</result>
+            <result name="student">/MyWebsite/indexStu.html</result>
+            <result name="teacher">/MyWebsite/indexTe.html</result>
+            <result name="Hteacher">/MyWebsite/index.html</result>          
+            <result name="Sys">/MyWebsite/indexSys.html</result>
+            <result name="failed">/MyWebsite/login.jsp</result>
+            
+        </action>
+        <action name="VerificationCode_exec" method="exec" class="cn.edu.seu.action.VerificationCodeAction">
+        <result name="success">
+            /user/welcome.jsp
+        </result>
+        </action>
+        
+          <action name="teacher_*" method="{1}" class="TeacherAction">
+            <result name = "sb">/user/teacherScore.jsp</result>
+              
+          </action>
+          
+         <action name="hteacher_*" method="{1}" class="HteacherAction">
+            <result name = "all">/MyWebsite/hAllScore.jsp</result>
+            <result name = "single">/MyWebsite/hSingleScore.jsp</result>
+            <result name = "lesson">/MyWebsite/hLessonScore.jsp</result>
+              
+         </action>
+         <action name="course_*" method ="{1}" class="courseAction">
+         <result name="search" >/MyWebsite/searchCourse.jsp</result>
+         
+         </action>
+         
+         <action name="scoreMaintain_*" method="{1}" class="scoreMaintainAction">
+         <result name="success">/MyWebsite/archives.jsp</result>
+         <result name = "{1}">/MyWebsite/updateScore.jsp</result>
+         </action>
+	</package>
+</struts>
